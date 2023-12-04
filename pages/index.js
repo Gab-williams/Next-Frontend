@@ -4,7 +4,7 @@ import data from "@/util/blogData";
 import Link from "next/link";
 import { useState } from "react";
 import Marquee from "react-fast-marquee";
-import ModalVideo from "react-modal-video";
+
 
 export default function Home1() {
   const [isOpen, setOpen] = useState(false);
