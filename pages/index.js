@@ -46,7 +46,7 @@ export default function Home1() {
                   <div className="tgbanner__five-thumb tgImage__hover   ">
                     <Link href="/blog/98">
                       <img
-                        src="/assets/img/Lifestyle/life_style01.jpg"
+                        src="/assets/img/Lifestyle/life_style15.jpg"
                         alt="img"
                       />
                     </Link>
@@ -85,7 +85,7 @@ export default function Home1() {
                   <div className="tgbanner__five-thumb tgImage__hover   ">
                     <Link href="/blog/99">
                       <img
-                        src="/assets/img/Lifestyle/life_style02.jpg"
+                        src="/assets/img/adventure/adventure10.jpg"
                         alt="img"
                       />
                     </Link>
@@ -151,7 +151,7 @@ export default function Home1() {
                       <div className="tgbanner__five-thumb tgImage__hover   ">
                         <Link href="/blog/101">
                           <img
-                            src="/assets/img/Lifestyle/life_style04.jpg"
+                            src="/assets/img/adventure/adventure09.jpg"
                             alt="img"
                           />
                         </Link>
