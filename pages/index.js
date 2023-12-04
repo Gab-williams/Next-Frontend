@@ -5,7 +5,6 @@ import Link from "next/link";
 import { useState } from "react";
 import Marquee from "react-fast-marquee";
 
-
 export default function Home1() {
   const [isOpen, setOpen] = useState(false);
 
