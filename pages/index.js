@@ -119,7 +119,7 @@ export default function Home1() {
                       <div className="tgbanner__five-thumb tgImage__hover   ">
                         <Link href="/blog/100">
                           <img
-                            src="/assets/img/Lifestyle/life_style03.jpg"
+                            src="/assets/img/adventure/adventure07.jpg"
                             alt="img"
                           />
                         </Link>
