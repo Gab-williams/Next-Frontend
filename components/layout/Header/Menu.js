@@ -36,6 +36,7 @@ export default function Menu({ handleMobileMenuOpen, handleSidebarOpen, offCanva
                     }
                     <div className="tgmenu__navbar-wrap tgmenu__main-menu d-none d-lg-flex">
                         <ul className="navigation">
+                        <li className={router.pathname == "/business" ? "active" : ""}><Link href="/">Home</Link></li>
                         <li className={router.pathname == "/business" ? "active" : ""}><Link href="/business">Business Insights</Link></li>
                             <li className={router.pathname == "/technology" ? "active" : ""}><Link href="/technology">Technology Trends</Link></li>
                             <li><Link href="/nft">Marketing & Finance</Link></li>
