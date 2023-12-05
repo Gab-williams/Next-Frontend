@@ -13,6 +13,7 @@ export default function BlogDetails() {
   const [fieldsdata, setfielddata] = useState({});
   const [datex, setdatex] = useState("");
   const [writername, setwritername] = useState("");
+  const [readtime, setreadtime] = useState("")
   const { id } = Router.query;
   const [category, setcategory] = useState("");
 

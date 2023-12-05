@@ -5532,6 +5532,11 @@ blockquote .blockquote-cite .info span {
     font-size: 120px;
   }
 }
+@media (max-width: 767px) {
+  .widget_categories {
+      padding-left: 15px; /* Adjust the padding as needed */
+  }
+}
 @media (max-width: 1199.98px) {
   .newsletter__wrap .row {
     align-items: flex-start !important;

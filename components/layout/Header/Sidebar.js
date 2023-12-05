@@ -11,15 +11,9 @@ export default function Sidebar({handleSidebarClose}) {
                             <Link href="/" className="logo-dark"><img src="/assets/img/logo/logo.png" alt="Logo" /></Link>
                             <Link href="/" className="logo-light"><img src="/assets/img/logo/w_logo.png" alt="Logo" /></Link>
                         </div>
-                        <p>Change how the world works with Biotellus, made for ecology.</p>
-                        <ul className="offCanvas__instagram list-wrap">
-                            <li><Link href="/assets/img/blog/blog01.jpg" className="popup-image"><img src="/assets/img/blog/blog01.jpg" alt="img" /></Link></li>
-                            <li><Link href="/assets/img/blog/blog02.jpg" className="popup-image"><img src="/assets/img/blog/blog02.jpg" alt="img" /></Link></li>
-                            <li><Link href="/assets/img/blog/blog03.jpg" className="popup-image"><img src="/assets/img/blog/blog03.jpg" alt="img" /></Link></li>
-                            <li><Link href="/assets/img/blog/blog04.jpg" className="popup-image"><img src="/assets/img/blog/blog04.jpg" alt="img" /></Link></li>
-                            <li><Link href="/assets/img/blog/blog05.jpg" className="popup-image"><img src="/assets/img/blog/blog05.jpg" alt="img" /></Link></li>
-                            <li><Link href="/assets/img/blog/blog06.jpg" className="popup-image"><img src="/assets/img/blog/blog06.jpg" alt="img" /></Link></li>
-                        </ul>
+                        <h4 className="title">About Us</h4>
+                        <p>Welcome to Dabar Media – where business, technology, and workplace culture converge to tell compelling stories. "Dabar," meaning 'word' or 'talk' in Hebrew, symbolizes our commitment to bringing powerful narratives to the forefront. Our name reflects our mission to uncover and narrate stories that shape the dynamic sectors of business and technology.</p>
+                       
                     </div>
                     <div className="offCanvas__contact">
                         <h4 className="title">Get In Touch</h4>
