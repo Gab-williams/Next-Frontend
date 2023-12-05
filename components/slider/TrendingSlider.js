@@ -111,14 +111,14 @@ export default function TrendingSlider({ showItem }) {
                     <SwiperSlide key={i}>
                         <div className="trending__post">
                             <div className="trending__post-thumb tgImage__hover">
-                                <Link href="/#" className="addWish"><i className="fal fa-heart" /></Link>
+                                
                                 <Link href={`/blog/${item.id}`}><img src={item.thumbnail} alt="img" /></Link>
                                 {/* {item.trending && <span className="is_trend"><i className="fas fa-bolt" /></span>} */}
                             </div>
                             <div className="trending__post-content">
                                 <ul className="tgbanner__content-meta list-wrap">
                                     <li className="category"><Link href="/blog">{item.category}</Link></li>
-                                    <li><span className="by">By</span> <Link href="/blog">{item.writer}.</Link></li>
+                                    <li> <Link href="/blog">{item.writer}.</Link></li>
                                 </ul>
                                 <h4 className="title tgcommon__hover"><Link href={`/blog/${item.id}`}>{item.heading}</Link></h4>
                                 

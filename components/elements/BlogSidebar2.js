@@ -15,37 +15,37 @@ export default function BlogSidebar2() {
                     <ul className="list-wrap">
                         <li>
                             <div className="thumb"><Link href="/blog"><img src="/assets/img/category/side_category01.jpg" alt="img" /></Link></div>
-                            <Link href="/blog">Business Insights</Link>
+                            <Link href={`/business?hello=Business Insights`}>Business Insights</Link>
                             
                         </li>
                         <li>
                             <div className="thumb"><Link href="/blog"><img src="/assets/img/category/side_category02.jpg" alt="img" /></Link></div>
-                            <Link href="/blog">Technology Trends</Link>
+                            <Link href={`/business?hello=Technology Trends`}>Technology Trends</Link>
                             
                         </li>
                         <li>
                             <div className="thumb"><Link href="/blog"><img src="/assets/img/category/side_category03.jpg" alt="img" /></Link></div>
-                            <Link href="/blog">Marketing & Finance</Link>
+                            <Link href={`/business?hello=Marketing & Finance`}>Marketing & Finance</Link>
                             
                         </li>
                         <li>
                             <div className="thumb"><Link href="/blog"><img src="/assets/img/category/side_category04.jpg" alt="img" /></Link></div>
-                            <Link href="/blog">Workplace & Culture</Link>
+                            <Link href={`/business?hello=Workplace & Culture`}>Workplace & Culture</Link>
                             
                         </li>
                         <li>
                             <div className="thumb"><Link href="/blog"><img src="/assets/img/category/side_category05.jpg" alt="img" /></Link></div>
-                            <Link href="/blog">Productivity & Innovation</Link>
+                            <Link href={`/business?hello=Productivity & Innovation`}  >Productivity & Innovation</Link>
                           
                         </li>
                         <li>
                             <div className="thumb"><Link href="/blog"><img src="/assets/img/category/side_category05.jpg" alt="img" /></Link></div>
-                            <Link href="/blog">Multimedia & Events</Link>
+                            <Link href={`/business?hello=Multimedia & Events`}>Multimedia & Events</Link>
                           
                         </li>
                         <li>
                             <div className="thumb"><Link href="/blog"><img src="/assets/img/category/side_category05.jpg" alt="img" /></Link></div>
-                            <Link href="/blog">Opinions & Editorials</Link>
+                            <Link href={`/business?hello=Opinions & Editorials`}>Opinions & Editorials</Link>
                           
                         </li>
                     </ul>

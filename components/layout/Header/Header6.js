@@ -2,6 +2,7 @@ import Link from "next/link"
 import Menu from "./Menu"
 import MobileMenu from "./MobileMenu"
 import Sidebar from "./Sidebar"
+import { useState } from "react"
 
 export default function Header6({ scroll,
     handleMobileMenuOpen,
@@ -9,7 +10,14 @@ export default function Header6({ scroll,
     langToggle,
     handleLangToggle,
     handleSidebarClose,
-    handleSidebarOpen }) {
+    handleSidebarOpen,
+    // handleSearch,
+    // search,
+    // setsearch
+ }) {
+
+    const [search, setsearch] = useState('');
+    console.log(search)
     return (
         <>
             <header className="header__style-six">
@@ -19,7 +27,7 @@ export default function Header6({ scroll,
                             <div className="col-lg-4 col-md-6 col-sm-6 order-2 order-lg-0">
                                 <div className="header__top-search">
                                     <form action="#">
-                                        <input type="text" placeholder="Search here..." />
+                                        <input type="text" value={search} onChange={(e) => setsearch(e.target.value)} placeholder="Search here... " />
                                     </form>
                                 </div>
                             </div>

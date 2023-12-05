@@ -9,7 +9,7 @@ const ThemeSwitch = dynamic(() => import('@/components/elements/ThemeSwitch'), {
 
 export default function Menu({ handleMobileMenuOpen, handleSidebarOpen, offCanvasNav, logoAlt, white }) {
     const router = useRouter()
-    const {id} = router.query
+    const {id, hello} = router.query
  
     const [searchToggle, setSearchToggle] = useState(false)
     const searchHandle = () => setSearchToggle(!searchToggle)
@@ -57,7 +57,7 @@ export default function Menu({ handleMobileMenuOpen, handleSidebarOpen, offCanva
           subcategories: ["Opinion & Editorial"],
         },
       ];
-
+    console.log(router.pathname)
   
     return (
         <>
@@ -85,7 +85,13 @@ export default function Menu({ handleMobileMenuOpen, handleSidebarOpen, offCanva
                     <div className="tgmenu__navbar-wrap tgmenu__main-menu d-none d-lg-flex">
                         <ul className="navigation">
                             {categoryMenu?.slice(0,3).map((item, i)=>{
-                              return <li key={i} className={router.pathname == "/business" ? "active" : ""}><Link href={`/business?hello=${encodeURIComponent(item.title)}`}>{item.title}</Link></li>
+                              if(hello){
+                                return <li key={i} className={hello.toLowerCase() == item.title.toLowerCase() ? "active" : ""}><Link href={`/business?hello=${encodeURIComponent(item.title)}`}>{item.title}</Link></li>
+
+                              }else{
+                                return <li key={i} className={router.pathname.toLowerCase() == item.title.toLowerCase() ? "active" : ""}><Link href={`/business?hello=${encodeURIComponent(item.title)}`}>{item.title}</Link></li>
+
+                              }
                             })}
                         {/* <li className={router.pathname == "/business" ? "active" : ""}><Link href="/business?hello=stephen">Business Insights</Link></li>
                             <li className={router.pathname == "/technology" ? "active" : ""}><Link href="/technology">Technology Trends</Link></li>
@@ -95,8 +101,14 @@ export default function Menu({ handleMobileMenuOpen, handleSidebarOpen, offCanva
                                 <ul className="sub-menu">
 
                                 {categoryMenu?.slice(3,7).map((item, i)=>{
-                              return <li key={i} className={router.pathname == "/business" ? "active" : ""}><Link href={`/business?hello=${encodeURIComponent(item.title)}`}>{item.title}</Link></li>
-                            })}
+                              if(hello){
+                                return <li key={i} className={hello.toLowerCase() == item.title.toLowerCase() ? "active" : ""}><Link href={`/business?hello=${encodeURIComponent(item.title)}`}>{item.title}</Link></li>
+
+                              }else{
+                                return <li key={i} className={router.pathname.toLowerCase() == item.title.toLowerCase() ? "active" : ""}><Link href={`/business?hello=${encodeURIComponent(item.title)}`}>{item.title}</Link></li>
+
+                              }                            
+                                })}
                                    
                                    {/* <li className={router.pathname == "/index-2" ? "active" : ""}><Link href="/">Multimedia & Events</Link></li>
                                      <li className={router.pathname == "/index-3" ? "active" : ""}><Link href="/">Productivity & Innovation</Link></li>

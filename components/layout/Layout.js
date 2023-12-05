@@ -13,7 +13,7 @@ import Header6 from './Header/Header6'
 import Header7 from './Header/Header7'
 import PageHead from './PageHead'
 
-const Layout = ({ headerStyle, footerStyle, children, breadcrumbCategory, breadcrumbPostTitle, footerClass, headTitle,logoWhite }) => {
+const Layout = ({ headerStyle, footerStyle, children, breadcrumbCategory, breadcrumbPostTitle, footerClass, headTitle,logoWhite, handleSearch, setsearch }) => {
 
     const handleMobileMenuOpen = () => {
         document.body.classList.add("mobile-menu-visible")
@@ -113,6 +113,9 @@ const Layout = ({ headerStyle, footerStyle, children, breadcrumbCategory, breadc
                 handleLangToggle={handleLangToggle}
                 handleSidebarOpen={handleSidebarOpen}
                 handleSidebarClose={handleSidebarClose}
+                // handleSearch={handleSearch}
+                // search={search}
+                // setsearch={setsearch}
             /> : null}
             {headerStyle == 7 ? <Header7
                 handleMobileMenuOpen={handleMobileMenuOpen}

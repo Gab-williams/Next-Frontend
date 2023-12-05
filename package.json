@@ -17,7 +17,7 @@
     "@fortawesome/free-brands-svg-icons": "^6.5.1",
     "@fortawesome/free-solid-svg-icons": "^6.5.1",
     "@fortawesome/react-fontawesome": "^0.2.0",
-    "contentful": "^10.6.14",
+    "contentful": "^10.6.13",
     "eslint": "8.36.0",
     "eslint-config-next": "13.2.4",
     "isotope-layout": "^3.0.6",

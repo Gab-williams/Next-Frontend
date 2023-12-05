@@ -57,13 +57,12 @@ export default function Business() {
          })
        );
       
-      
-       // let filterdata = newData.filter((item)=>item.category.toLowerCase() == hello.toLowerCase())
-       setorignalarr(newData)
-        let page = Math.ceil(newData.length / 6);
+         let filterdata = newData.filter((item)=>item.category.toLowerCase() == hello.toLowerCase())
+  
+        let page = Math.ceil(filterdata.length / 6);
         const indexofLastPost =  currentPage * pageSize;
         const indexofFirstPost = indexofLastPost - pageSize;
-        let ansdata = newData?.slice(indexofFirstPost, indexofLastPost);
+        let ansdata = filterdata?.slice(indexofFirstPost, indexofLastPost);
         SetData(ansdata)
         setnumberofpage(page)
     }
@@ -85,7 +84,7 @@ export default function Business() {
 
   return (
     <>
-      <Layout breadcrumbCategory="Category" breadcrumbPostTitle="Business">
+      <Layout breadcrumbCategory="Category" breadcrumbPostTitle={hello}>
         <section className="blog-details-area pt-80 pb-100">
           <div className="container">
             <div className="row justify-content-center">
@@ -119,10 +118,11 @@ export default function Business() {
                 <div className="blog-post-wrapper">
                     {Data && Data.length > 0?
                      <div className="latest__post-item" key={Data[0].id}>
+
                      <div className="latest__post-thumb tgImage__hover">
                        <Link href={`/blog/${encodeURIComponent(Data[0].id)}`} >
                          <img
-                           src={Data[0].thumbnail}
+                           src={Object.keys(Data[0]).length > 0?Data[0].thumbnail:""}
                            alt="img"
                          />
                        </Link>
@@ -130,39 +130,41 @@ export default function Business() {
                      <div className="latest__post-content">
                        <ul className="tgbanner__content-meta list-wrap">
                          <li className="category">
-                           <Link href={`/blog/${encodeURIComponent(Data[0].id)}`} >{Data[0].category}</Link>
+                           <Link href={`/blog/${encodeURIComponent(Object.keys(  Data[0]).length >0? Data[0].id:"")}`} >{Object.keys(Data[0]).length >0?Data[0].category:""}</Link>
                          </li>
                          <li>
                            <span className="by">By</span>{" "}
-                           <Link href={`/blog/1?id=${encodeURIComponent(Data[0].id)}`} >{Data[0].writer}.</Link>
+                           <Link href={`/blog/1?id=${encodeURIComponent(Object.keys(Data[0]).length >0?Data[0].id:"")}`} >{Object.keys(Data[0]).length >0?Data[0].writer:""}.</Link>
                          </li>
                          <li>nov 22, 2022</li>
                        </ul>
                        <h3 className="title tgcommon__hover">
-                         <Link href={`/blog/${encodeURIComponent(Data[0].id)}`} >
-                            {Data[0].heading}
+                         <Link href={`/blog/${encodeURIComponent(Object.keys(Data[0]).length >0?Data[0].id:"")}`} >
+                            {Object.keys(Data[0]).length >0?Data[0].heading:""}
                          </Link>
                        </h3>
                        <p>
                        {Data[0].summary}
                        </p>
                        <div className="latest__post-read-more">
-                         <Link  href={`/blog/${encodeURIComponent(Data[0].id)}`}>
+                         <Link  href={`/blog/${encodeURIComponent(Object.keys(Data[0]).length >0?Data[0].id:"")}`}>
                            Read More <i className="far fa-long-arrow-right" />
                          </Link>
                        </div>
                      </div>
+
+
                    </div>
                     
                     :""}
                  
                   
                   
-                  {/* Additional articles */}
                   <div className="row row--10">
                     {Data.slice(1, 3).length > 0?
                     Data.slice(1, 3).map((item, i)=>{
                       return   <div className="col-lg-6 col-md-6 col-sm-6 col-12 mt--20" key={i}>
+                        
                       <div className="latest__post-item">
                       <div className="latest__post-thumb tgImage__hover">
                         <Link  href={`/blog/${encodeURIComponent(item.id)}`}>
@@ -173,24 +175,27 @@ export default function Business() {
                         </Link>
                       </div>
                       <div className="latest__post-content">
-                        <ul className="tgbanner__content-meta list-wrap">
-                          <li className="category">
-                            <Link href="/blog">{item.heading}</Link>
-                          </li>
-                          <li>
-                            <span className="by">By</span>{" "}
-                            <Link href="/blog">{item.writer}.</Link>
-                          </li>
-                          <li>nov 22, 2022</li>
-                        </ul>
-                        <h3 className="title tgcommon__hover">
-                          <Link  href={`/blog/${encodeURIComponent(item.id)}`}>
-                           {item.presummary}
-                          </Link>
-                        </h3>
-                        <p>
-                        {item.summary.length > 200? item.summary.substr(0,150):""}
-                        </p>
+                      <ul className="tgbanner__content-meta list-wrap">
+                         <li className="category">
+                           <Link href="/blog">{item.category}</Link>
+                         </li>
+                         <li>
+                           <span className="by">By</span>{" "}
+                           <Link href="/blog">{item.writer}.</Link>
+                         </li>
+                         <li>
+                           <Link href="/blog">{item.timez}.</Link>
+                         </li>
+                       </ul>
+                       <h3 className="title tgcommon__hover">
+                         <Link href={`/blog/${encodeURIComponent(item.id)}`} >
+                            {Data[0].heading}
+                         </Link>
+                       </h3>
+                       <p>
+                       {item.summary}
+                       </p>
+                       
                         <div className="latest__post-read-more">
                           <Link  href={`/blog/${encodeURIComponent(item.id)}`}>
                             Read More <i className="far fa-long-arrow-right" />
@@ -198,7 +203,10 @@ export default function Business() {
                         </div>
                       </div>
                         </div>
-                      </div>
+                        </div>
+
+
+          
                     })
                     
                     :""}
@@ -208,7 +216,7 @@ export default function Business() {
                     {Data.slice(3, 5).length > 0?
                     Data.slice(3, 5).map((item, i)=>{
                       return   <div className="col-lg-6 col-md-6 col-sm-6 col-12 mt--20" key={i}>
-                      <div className="latest__post-item">
+                       <div className="latest__post-item">
                       <div className="latest__post-thumb tgImage__hover">
                         <Link  href={`/blog/${encodeURIComponent(item.id)}`}>
                           <img
@@ -218,24 +226,27 @@ export default function Business() {
                         </Link>
                       </div>
                       <div className="latest__post-content">
-                        <ul className="tgbanner__content-meta list-wrap">
-                          <li className="category">
-                            <Link href={`/blog/${encodeURIComponent(item.id)}`}>{item.heading}</Link>
-                          </li>
-                          <li>
-                            <span className="by">By</span>{" "}
-                            <Link href={`/blog/${encodeURIComponent(item.id)}`}>{item.writer}.</Link>
-                          </li>
-                          <li>nov 22, 2022</li>
-                        </ul>
-                        <h3 className="title tgcommon__hover">
-                          <Link  href={`/blog/${encodeURIComponent(item.id)}`}>
-                           {item.presummary}
-                          </Link>
-                        </h3>
-                        <p>
-                        {item.summary.length > 200? item.summary.substr(0,150):""}
-                        </p>
+                      <ul className="tgbanner__content-meta list-wrap">
+                         <li className="category">
+                           <Link href="/blog">{item.category}</Link>
+                         </li>
+                         <li>
+                           <span className="by">By</span>{" "}
+                           <Link href="/blog">{item.writer}.</Link>
+                         </li>
+                         <li>
+                           <Link href="/blog">{item.timez}.</Link>
+                         </li>
+                       </ul>
+                       <h3 className="title tgcommon__hover">
+                         <Link href={`/blog/${encodeURIComponent(item.id)}`} >
+                            {item.heading}
+                         </Link>
+                       </h3>
+                       <p>
+                       {item.summary}
+                       </p>
+                       
                         <div className="latest__post-read-more">
                           <Link  href={`/blog/${encodeURIComponent(item.id)}`}>
                             Read More <i className="far fa-long-arrow-right" />
@@ -252,9 +263,9 @@ export default function Business() {
                   {Data && Data.length > 0?
                   <div className="latest__post-item">
                   <div className="latest__post-thumb tgImage__hover">
-                    <Link  href={`/blog/${encodeURIComponent(Data[5].id)}`}>
+                    <Link  href={`/blog/${encodeURIComponent(Data.length >= 6 && Object.keys(Data[5]).length > 0 ? Data[5].id : "")}`}>
                       <img
-                        src={Data[5].thumbnail}
+                        src={Data[5] && Object.keys(Data[5]).length > 0 && Data[5].thumbnail ? Data[5].thumbnail : ""}
                         alt="img"
                       />
                     </Link>
@@ -262,24 +273,24 @@ export default function Business() {
                   <div className="latest__post-content">
                     <ul className="tgbanner__content-meta list-wrap">
                       <li className="category">
-                        <Link  href={`/blog/${encodeURIComponent(Data[5].id)}`}>{Data[5].category}</Link>
+                        <Link  href={`/blog/${encodeURIComponent(Data.length >= 6 && Object.keys(Data[5]).length > 0 ? Data[5].id : "")}`}>{Data[5] && Object.keys(Data[5]).length > 0 ? Data[5].category : ""}</Link>
                       </li>
                       <li>
                         <span className="by">By</span>{" "}
-                        <Link href="/blog">{Data[5].writer}.</Link>
+                        <Link href="/blog">{Data[5] && Object.keys(Data[5]).length > 0 ? Data[5].writer : ''}.</Link>
                       </li>
-                      <li>{Data[5].timez}</li>
+                      <li>{Data[5] && Data[5].timez ? Data[5].timez :''}</li>
                     </ul>
                     <h3 className="title tgcommon__hover">
-                      <Link  href={`/blog/${encodeURIComponent(Data[5].id)}`}>
-                      {Data[5].heading}
+                      <Link  href={`/blog/${encodeURIComponent(Data.length >= 6 && Object.keys(Data[5]).length > 0 ? Data[5].id : "")}`}>
+                      {Data[5] && Object.keys(Data[5]).length > 0 ? Data[5].heading : ""}
                       </Link>
                     </h3>
                     <p>
-                        {Data[5].presummary}
+                        {Data[5] && Data[5].presummary ? Data[5].presummary : ""}
                     </p>
                     <div className="latest__post-read-more">
-                      <Link  href={`/blog/${encodeURIComponent(Data[5].id)}`}>
+                      <Link  href={`/blog/${encodeURIComponent(Data.length >= 6 && Object.keys(Data[5]).length > 0 ? Data[5].id : "")}`}>
                         Read More <i className="far fa-long-arrow-right" />
                       </Link>
                     </div>
