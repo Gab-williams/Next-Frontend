@@ -120,7 +120,6 @@ export default function BlogDetails() {
                           <Link href={`/blog/${id}`}>{category}</Link>
                         </li>
                         <li>
-                         
                           <Link href="/blog">{writername}.</Link>
                         </li>
                         <li>{datex}</li>
@@ -142,11 +141,11 @@ export default function BlogDetails() {
                                 <div className="blog-details-images">
                                   <div className="row">
                                     <div className="col-md-12 col-sm-6">
-                                      <div className="details-inner-image">
+                                      <div className="details-inner-image d-flex justify-content-center align-items-center">
                                         <img
                                           src={item.data.target.fields.file.url}
                                           alt="img"
-                                          className="img-fluid   "
+                                          className="img-fluid"
                                         />
                                       </div>
                                     </div>
@@ -174,7 +173,7 @@ export default function BlogDetails() {
                       <div className="blog-details-bottom">
                         <div className="row align-items-baseline">
                           <div className="col-xl-6 col-md-7">
-                            <div className="blog-details-tags">
+                            {/* <div className="blog-details-tags">
                               <ul className="list-wrap mb-0">
                                 <li>
                                   <Link href="#">technology</Link>
@@ -186,7 +185,7 @@ export default function BlogDetails() {
                                   <Link href="#">business</Link>
                                 </li>
                               </ul>
-                            </div>
+                            </div> */}
                           </div>
                         </div>
                       </div>
