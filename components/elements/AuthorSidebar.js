@@ -16,7 +16,7 @@ export default function AuthorSidebar() {
                         <div className="tgAbout-social">
                             <Link href="#"><i className="fab fa-facebook-f" /></Link>
                             <Link href="#"><i className="fab fa-twitter" /></Link>
-                            <Link href="#"><i className="fab fa-behance" /></Link>
+                            <Link href="#"><i className="fab fa-instagram" /></Link>
                             <Link href="#"><i className="fab fa-youtube" /></Link>
                         </div>
                     </div>

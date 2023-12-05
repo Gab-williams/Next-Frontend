@@ -188,6 +188,57 @@ export default function Home1() {
     };
 
     Popular();
+
+    const Local = async () => {
+      let story = await client.getEntries({
+        content_type: "currentstories",
+        select: "fields",
+      });
+      const newData = await Promise.all(
+        story?.items.map(async (item) => {
+          let timez = new Date(item.fields.storyId.sys.createdAt);
+          const monthNames = [
+            "Jan",
+            "Feb",
+            "Mar",
+            "Apr",
+            "May",
+            "Jun",
+            "Jul",
+            "Aug",
+            "Sept",
+            "Oct",
+            "Nov",
+            "Dec",
+          ];
+          const day = timez.getDate();
+          const monthIndex = timez.getMonth();
+          const year = timez.getFullYear();
+          const formattedDate = `${day} ${monthNames[monthIndex]} ${year}`;
+
+          let data = await client.getEntry(
+            item.fields.storyId.fields.categoryId.sys.id
+          );
+          let writer = await client.getEntry(
+            item.fields.storyId.fields.writerId.sys.id
+          );
+          let answer = data.fields.category;
+          let answriter = writer.fields.name;
+          return {
+            heading: item.fields.storyId.fields.heading,
+            summary: item.fields.storyId.fields.summary,
+            presummary: item.fields.storyId.fields.preSummary,
+            thumbnail: item.fields.storyId.fields.thumbnail.fields.file.url,
+            category: answer,
+            writer: answriter,
+            id: item.sys.id,
+            timez: formattedDate,
+          };
+        })
+      );
+      localStorage.setItem("stories", JSON.stringify(newData));
+    };
+    Local();
   }, []);
   return (
     <>
@@ -232,7 +283,9 @@ export default function Home1() {
                     </div>
                     <div className="tgbanner__five-content">
                       <Link
-                        href={`/blog/${Herodata[0].id}`}
+                        href={`/business?hello=${encodeURIComponent(
+                          Herodata[0].subcategories
+                        )}`}
                         className="tags text-orange text-uppercase fw-bold"
                       >
                         {Herodata[0].subcategories}
@@ -254,10 +307,10 @@ export default function Home1() {
                       <ul className="tgbanner__content-meta list-wrap">
                         <li>
                           <Link href={`/blog/${Herodata[0].id}`}>
-                            alonso d.
+                          {Herodata[1].writername}
                           </Link>
                         </li>
-                        <li>nov 21, 2022</li>
+                        <li>{Herodata[1].timez}</li>
                       </ul>
                     </div>
                   </div>
@@ -270,23 +323,29 @@ export default function Home1() {
                 {Herodata && Herodata.length > 0 ? (
                   <div className="tgbanner__five-item small-post">
                     <div className="tgbanner__five-thumb tgImage__hover   ">
-                      <Link href="/blog/99">
+                      <Link href={`/blog/${Herodata[1].id}`}>
                         <img src={Herodata[1].thumbnail} alt="img" />
                       </Link>
                     </div>
                     <div className="tgbanner__five-content">
                       <Link
-                        href="/blog"
+                        href={`/business?hello=${encodeURIComponent(
+                          Herodata[1].subcategories
+                        )}`}
                         className="tags text-orange text-uppercase fw-bold "
                       >
                         {Herodata[1].subcategories}
                       </Link>
                       <h2 className="title tgcommon__hover mt-2 mb-1">
-                        <Link href="/blog/99">{Herodata[1].heading}</Link>
+                        <Link href={`/blog/${Herodata[1].id}`}>
+                          {Herodata[1].heading}
+                        </Link>
                       </h2>
                       <ul className="tgbanner__content-meta list-wrap">
                         <li>
-                          <Link href="/blog">{Herodata[1].writername}.</Link>
+                          <Link href={`/blog/${Herodata[1].id}`}>
+                            {Herodata[1].writername}
+                          </Link>
                         </li>
                         <li>{Herodata[1].timez}</li>
                       </ul>
@@ -308,17 +367,23 @@ export default function Home1() {
                           </div>
                           <div className="tgbanner__five-content">
                             <Link
-                              href="/blog"
+                              href={`/business?hello=${encodeURIComponent(
+                                item.subcategories
+                              )}`}
                               className="tags text-orange text-uppercase fw-bold"
                             >
                               {item.subcategories}
                             </Link>
                             <h2 className="title tgcommon__hover mt-2 mb-2">
-                              <Link href="/blog/101">{item.heading}</Link>
+                              <Link href={`/blog/${item.id}`}>
+                                {item.heading}
+                              </Link>
                             </h2>
                             <ul className="tgbanner__content-meta list-wrap">
                               <li>
-                                <Link href="/blog">{item.writername}.</Link>
+                                <Link href={`/blog/${item.id}`}>
+                                  {item.writername}
+                                </Link>
                               </li>
                               <li>{item.timez}</li>
                             </ul>
@@ -394,10 +459,18 @@ export default function Home1() {
                         <div className="featured__content">
                           <ul className="tgbanner__content-meta list-wrap">
                             <li className="category">
-                              <Link href="/blog">{item.category}</Link>
+                              <Link
+                                href={`/business?hello=${encodeURIComponent(
+                                  item.category
+                                )}`}
+                              >
+                                {item.category}
+                              </Link>
                             </li>
                             <li>
-                              <Link href="/blog">{item.writername}.</Link>
+                              <Link href={`/blog/${item.id}`}>
+                                {item.writername}
+                              </Link>
                             </li>
                           </ul>
                           <h4 className="title tgcommon__hover">
@@ -413,7 +486,7 @@ export default function Home1() {
             </div>
           </div>
         </section>
-        <div className="advertisement pt-45 pb-0">
+        <div className="advertisement pt-45 pb-10">
           <div className="container">
             <div className="col-12">
               <div className="advertisement__image text-center">
@@ -601,10 +674,16 @@ export default function Home1() {
                     <div className="trending__post-content">
                       <ul className="tgbanner__content-meta list-wrap">
                         <li className="category">
-                          <Link href="/blog">{item.category}</Link>
+                          <Link
+                            href={`/business?hello=${encodeURIComponent(
+                              item.category
+                            )}`}
+                          >
+                            {item.category}
+                          </Link>
                         </li>
                         <li>
-                          <Link href="/blog">{item.writername}</Link>
+                          <Link href={`/blog/${item.id}`}>{item.writername}</Link>
                         </li>
                       </ul>
                       <h4 className="title tgcommon__hover">

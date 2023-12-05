@@ -117,8 +117,10 @@ export default function TrendingSlider({ showItem }) {
                             </div>
                             <div className="trending__post-content">
                                 <ul className="tgbanner__content-meta list-wrap">
-                                    <li className="category"><Link href="/blog">{item.category}</Link></li>
-                                    <li> <Link href="/blog">{item.writer}.</Link></li>
+                                    <li className="category"><Link
+                                       href={`/business?hello=${encodeURIComponent(item.category)}`}
+                                     >{item.category}</Link></li>
+                                    <li><Link href={`/blog/${item.id}`}>{item.writer}</Link></li>
                                 </ul>
                                 <h4 className="title tgcommon__hover"><Link href={`/blog/${item.id}`}>{item.heading}</Link></h4>
                                 

@@ -4,6 +4,58 @@ import SidePostSlider from '../slider/SidePostSlider'
 import Authorside from "@/components/elements/AuthorSidebar"
 
 export default function BlogSidebar2() {
+
+      const categoryMenu = [
+        {
+          title: "Business Insights",
+          img:"/assets/img/category/side_category02.jpg",
+          subcategories: [
+            "Industry Insights",
+            "Entrepreneurship",
+            "Leadership & Management",
+            "Global Economy",
+            "Corporate Responsibility",
+          ],
+        },
+        {
+          title: "Technology Trends",
+          img:"/assets/img/category/side_category01.jpg",
+          subcategories: [
+            "Technology & Innovation",
+            "Blockchain & Cryptocurrency",
+            "Artificial Intelligence & Machine Learning",
+          ],
+        },
+        {
+          title: "Marketing & Finance",
+          img:"/assets/img/category/side_category09.jpg",
+          subcategories: ["Marketing & Advertising", "Finance & Investment"],
+        },
+        {
+          title: "Workplace & Culture",
+          img:"/assets/img/category/side_category04.jpg",
+          subcategories: [
+            "Human Resources",
+            "Diversity & Inclusion",
+            "Career Development",
+          ],
+        },
+        {
+          title: "Productivity & Innovation",
+          img:"/assets/img/category/side_category06.png",
+          subcategories: ["Productivity & Tools", "Innovation Implementation"],
+        },
+        {
+          title: "Multimedia & Events",
+          img:"/assets/img/category/side_category08.png",
+          subcategories: ["Events & Conferences", "Multimedia Content"],
+        },
+        {
+          title: "Opinions & Editorials",
+          img:"/assets/img/category/side_category07.png",
+          subcategories: ["Opinion & Editorial"],
+        },
+      ];
     return (
         <>
         
@@ -13,41 +65,17 @@ export default function BlogSidebar2() {
                 <div className="widget sidebar-widget widget_categories">
                     <h4 className="widget-title">Trending Category</h4>
                     <ul className="list-wrap">
-                        <li>
-                            <div className="thumb"><Link href="/blog"><img src="/assets/img/category/side_category01.jpg" alt="img" /></Link></div>
-                            <Link href={`/business?hello=Business Insights`}>Business Insights</Link>
+
+                        {categoryMenu.map((item)=>{
+                            return  <li>
+                            <div className="thumb"><Link  href={`/business?hello=${encodeURIComponent(item.title)}`}><img src={item.img} alt="img" /></Link></div>
+                            <Link href={`/business?hello=${encodeURIComponent(item.title)}`}>{item.title}</Link>
                             
                         </li>
-                        <li>
-                            <div className="thumb"><Link href="/blog"><img src="/assets/img/category/side_category02.jpg" alt="img" /></Link></div>
-                            <Link href={`/business?hello=Technology Trends`}>Technology Trends</Link>
-                            
-                        </li>
-                        <li>
-                            <div className="thumb"><Link href="/blog"><img src="/assets/img/category/side_category03.jpg" alt="img" /></Link></div>
-                            <Link href={`/business?hello=Marketing & Finance`}>Marketing & Finance</Link>
-                            
-                        </li>
-                        <li>
-                            <div className="thumb"><Link href="/blog"><img src="/assets/img/category/side_category04.jpg" alt="img" /></Link></div>
-                            <Link href={`/business?hello=Workplace & Culture`}>Workplace & Culture</Link>
-                            
-                        </li>
-                        <li>
-                            <div className="thumb"><Link href="/blog"><img src="/assets/img/category/side_category05.jpg" alt="img" /></Link></div>
-                            <Link href={`/business?hello=Productivity & Innovation`}  >Productivity & Innovation</Link>
-                          
-                        </li>
-                        <li>
-                            <div className="thumb"><Link href="/blog"><img src="/assets/img/category/side_category05.jpg" alt="img" /></Link></div>
-                            <Link href={`/business?hello=Multimedia & Events`}>Multimedia & Events</Link>
-                          
-                        </li>
-                        <li>
-                            <div className="thumb"><Link href="/blog"><img src="/assets/img/category/side_category05.jpg" alt="img" /></Link></div>
-                            <Link href={`/business?hello=Opinions & Editorials`}>Opinions & Editorials</Link>
-                          
-                        </li>
+                        })}
+                      
+                        
+                      
                     </ul>
                 </div>
                 <div className="widget sidebar-widget">

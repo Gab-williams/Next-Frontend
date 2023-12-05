@@ -3,7 +3,8 @@ import InstagramSidebarSlider from '../slider/InstagramSidebarSlider'
 import SidePostSlider from '../slider/SidePostSlider'
 import Authorside from "@/components/elements/AuthorSidebar"
 
-export default function BlogSidebar() {
+export default function BlogSidebar(props) {
+    const {writer} = props
     return (
         <>
         
@@ -16,7 +17,7 @@ export default function BlogSidebar() {
                         </div>
                         <div className="tgAbout-info">
                             
-                            <span className="designation">Content Writer</span>
+                            <span className="designation">{writer}</span>
                         </div>
                         <div className="tgAbout-social">
                             <Link href="#"><i className="fab fa-facebook-f" /></Link>
@@ -30,17 +31,17 @@ export default function BlogSidebar() {
                     <h4 className="widget-title">Trending Category</h4>
                     <ul className="list-wrap">
                         <li>
-                            <div className="thumb"><Link href="/blog"><img src="/assets/img/category/side_category01.jpg" alt="img" /></Link></div>
+                            <div className="thumb"><Link href="/blog"><img src="/assets/img/category/side_category02.jpg" alt="img" /></Link></div>
                             <Link href="/blog">Business Insights</Link>
                             
                         </li>
                         <li>
-                            <div className="thumb"><Link href="/blog"><img src="/assets/img/category/side_category02.jpg" alt="img" /></Link></div>
+                            <div className="thumb"><Link href="/blog"><img src="/assets/img/category/side_category01.jpg" alt="img" /></Link></div>
                             <Link href="/blog">Technology Trends</Link>
                             
                         </li>
                         <li>
-                            <div className="thumb"><Link href="/blog"><img src="/assets/img/category/side_category03.jpg" alt="img" /></Link></div>
+                            <div className="thumb"><Link href="/blog"><img src="/assets/img/category/side_category09.jpg" alt="img" /></Link></div>
                             <Link href="/blog">Marketing & Finance</Link>
                             
                         </li>
@@ -50,17 +51,17 @@ export default function BlogSidebar() {
                             
                         </li>
                         <li>
-                            <div className="thumb"><Link href="/blog"><img src="/assets/img/category/side_category05.jpg" alt="img" /></Link></div>
+                            <div className="thumb"><Link href="/blog"><img src="/assets/img/category/side_category06.png" alt="img" /></Link></div>
                             <Link href="/blog">Productivity & Innovation</Link>
                           
                         </li>
                         <li>
-                            <div className="thumb"><Link href="/blog"><img src="/assets/img/category/side_category05.jpg" alt="img" /></Link></div>
+                            <div className="thumb"><Link href="/blog"><img src="/assets/img/category/side_category08.png" alt="img" /></Link></div>
                             <Link href="/blog">Multimedia & Events</Link>
                           
                         </li>
                         <li>
-                            <div className="thumb"><Link href="/blog"><img src="/assets/img/category/side_category05.jpg" alt="img" /></Link></div>
+                            <div className="thumb"><Link href="/blog"><img src="/assets/img/category/side_category07.png" alt="img" /></Link></div>
                             <Link href="/blog">Opinions & Editorials</Link>
                           
                         </li>

@@ -57,7 +57,6 @@ export default function Menu({ handleMobileMenuOpen, handleSidebarOpen, offCanva
           subcategories: ["Opinion & Editorial"],
         },
       ];
-    console.log(router.pathname)
   
     return (
         <>
