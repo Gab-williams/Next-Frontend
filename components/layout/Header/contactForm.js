@@ -26,7 +26,7 @@ const ContactForm = () => {
   return (
     <Form onSubmit={handleSubmit}>
       <Form.Group controlId="formName">
-        <Form.Label>Name</Form.Label>
+        <Form.Label style={{ width:"100%", textAlign:"left" }}>Name</Form.Label>
         <Form.Control
           type="text"
           placeholder="Enter your name"
@@ -38,7 +38,7 @@ const ContactForm = () => {
       </Form.Group>
 
       <Form.Group controlId="formEmail">
-        <Form.Label>Email address</Form.Label>
+        <Form.Label style={{ width:"100%", textAlign:"left" }}>Email address</Form.Label>
         <Form.Control
           type="email"
           placeholder="Enter your email"
@@ -50,7 +50,7 @@ const ContactForm = () => {
       </Form.Group>
 
       <Form.Group controlId="formMessage">
-        <Form.Label>Message</Form.Label>
+        <Form.Label style={{ width:"100%", textAlign:"left" }}>Message</Form.Label>
         <Form.Control
           as="textarea"
           rows={4}
@@ -62,7 +62,7 @@ const ContactForm = () => {
         />
       </Form.Group>
 
-      <Button variant="primary" type="submit">
+      <Button variant="primary" style={{ marginTop:"10px" }} type="submit">
         Submit
       </Button>
     </Form>

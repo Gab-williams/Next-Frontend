@@ -1,16 +1,64 @@
 import dynamic from 'next/dynamic'
 import Link from "next/link"
 import { useRouter } from "next/router"
-import { useState } from "react"
+import { useState } from "react";
+
 const ThemeSwitch = dynamic(() => import('@/components/elements/ThemeSwitch'), {
     ssr: false
 })
 
 export default function Menu({ handleMobileMenuOpen, handleSidebarOpen, offCanvasNav, logoAlt, white }) {
     const router = useRouter()
+    const {id} = router.query
+ 
     const [searchToggle, setSearchToggle] = useState(false)
     const searchHandle = () => setSearchToggle(!searchToggle)
+    const categoryMenu = [
+        {
+          title: "Business Insights",
+          subcategories: [
+            "Industry Insights",
+            "Entrepreneurship",
+            "Leadership & Management",
+            "Global Economy",
+            "Corporate Responsibility",
+          ],
+        },
+        {
+          title: "Technology Trends",
+          subcategories: [
+            "Technology & Innovation",
+            "Blockchain & Cryptocurrency",
+            "Artificial Intelligence & Machine Learning",
+          ],
+        },
+        {
+          title: "Marketing & Finance",
+          subcategories: ["Marketing & Advertising", "Finance & Investment"],
+        },
+        {
+          title: "Workplace & Culture",
+          subcategories: [
+            "Human Resources",
+            "Diversity & Inclusion",
+            "Career Development",
+          ],
+        },
+        {
+          title: "Productivity & Innovation",
+          subcategories: ["Productivity & Tools", "Innovation Implementation"],
+        },
+        {
+          title: "Multimedia & Events",
+          subcategories: ["Events & Conferences", "Multimedia Content"],
+        },
+        {
+          title: "Opinions & Editorials",
+          subcategories: ["Opinion & Editorial"],
+        },
+      ];
 
+  
     return (
         <>
             <div className="tgmenu__wrap">
@@ -36,17 +84,24 @@ export default function Menu({ handleMobileMenuOpen, handleSidebarOpen, offCanva
                     }
                     <div className="tgmenu__navbar-wrap tgmenu__main-menu d-none d-lg-flex">
                         <ul className="navigation">
-                        <li className={router.pathname == "/business" ? "active" : ""}><Link href="/">Home</Link></li>
-                        <li className={router.pathname == "/business" ? "active" : ""}><Link href="/business">Business Insights</Link></li>
+                            {categoryMenu?.slice(0,3).map((item, i)=>{
+                              return <li key={i} className={router.pathname == "/business" ? "active" : ""}><Link href={`/business?hello=${encodeURIComponent(item.title)}`}>{item.title}</Link></li>
+                            })}
+                        {/* <li className={router.pathname == "/business" ? "active" : ""}><Link href="/business?hello=stephen">Business Insights</Link></li>
                             <li className={router.pathname == "/technology" ? "active" : ""}><Link href="/technology">Technology Trends</Link></li>
-                            <li><Link href="/nft">Marketing & Finance</Link></li>
+                            <li><Link href="/nft">Marketing & Finance</Link></li> */}
+
                             <li className="menu-item-has-children"><Link href="#">More</Link>
                                 <ul className="sub-menu">
+
+                                {categoryMenu?.slice(3,7).map((item, i)=>{
+                              return <li key={i} className={router.pathname == "/business" ? "active" : ""}><Link href={`/business?hello=${encodeURIComponent(item.title)}`}>{item.title}</Link></li>
+                            })}
                                    
-                                    <li className={router.pathname == "/index-2" ? "active" : ""}><Link href="/">Multimedia & Events</Link></li>
-                                    <li className={router.pathname == "/index-3" ? "active" : ""}><Link href="/">Productivity & Innovation</Link></li>
+                                   {/* <li className={router.pathname == "/index-2" ? "active" : ""}><Link href="/">Multimedia & Events</Link></li>
+                                     <li className={router.pathname == "/index-3" ? "active" : ""}><Link href="/">Productivity & Innovation</Link></li>
                                     <li className={router.pathname == "/index-4" ? "active" : ""}><Link href="/">Opinions & Editorials</Link></li>
-                                    <li className={router.pathname == "/index-5" ? "active" : ""}><Link href="/">Workplace & Culture</Link></li>
+                                    <li className={router.pathname == "/index-5" ? "active" : ""}><Link href="/">Workplace & Culture</Link></li> */}
                                 
                                 </ul>
                             </li>

@@ -1,8 +1,14 @@
 import BlogSidebar2 from "@/components/elements/BlogSidebar2"
 import Layout from "@/components/layout/Layout"
 import Link from "next/link"
+import { useRouter } from "next/router"
 
 export default function Blog() {
+
+    const {id} = router.query
+    console.log(id)
+  
+
     return (
         <>
             <Layout breadcrumbCategory="Category" breadcrumbPostTitle="Blog">

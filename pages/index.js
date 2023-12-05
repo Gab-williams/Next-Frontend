@@ -2,12 +2,162 @@ import Layout from "@/components/layout/Layout";
 import TrendingSlider from "@/components/slider/TrendingSlider";
 import data from "@/util/blogData";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from 'react'
 import Marquee from "react-fast-marquee";
+import ModalVideo from "react-modal-video";
+import {createClient} from 'contentful';
 
 export default function Home1() {
   const [isOpen, setOpen] = useState(false);
+  const [Herodata, setHerodata] = useState([])
+  const [featured, setfeatured] = useState([])
+  const [popular, setPopular] = useState([])
+  const client =  createClient({
+    space:'t0pszie0jiqu',
+    accessToken:'bm2qgxL1ruXxTPkEQT0KgtAuHOwVxlOzOuj-AoNo-AM',
+  });
 
+  useEffect(()=>{
+  
+    const HeroAPi = async()=>{
+      // Hero Stories
+      let top = await client.getEntries({content_type:"topstories",
+      select:'fields'})
+     // top?.items
+
+
+     const newData = await Promise.all(
+      top?.items.map(async (item) => {
+        // console.log(item.fields.storyId.fields.preSummary)
+        let timez = new Date(item.fields.storyId.sys.createdAt)
+        const monthNames = [
+         "Jan", "Feb", "Mar",
+         "Apr", "May", "Jun", "Jul",
+         "Aug", "Sept", "Oct",
+         "Nov", "Dec"
+       ];
+       const day = timez.getDate();
+        const monthIndex = timez.getMonth();
+        const year = timez.getFullYear();
+        const formattedDate = `${day} ${monthNames[monthIndex]} ${year}`;
+        let getid = await client.getEntry(item.sys.id)
+        let data = await client.getEntry(item.fields.storyId.fields.categoryId.sys.id);
+        let writer = await client.getEntry(item.fields.storyId.fields.writerId.sys.id);
+        let answer = data.fields.category;
+        return {
+          heading: item.fields.storyId.fields.heading,
+          // summary: item.fields.storyId.fields.summary,
+          summary:item.fields.storyId.fields.preSummary,
+          thumbnail: item.fields.storyId.fields.thumbnail.fields.file.url,
+          subcategories: answer,
+          id:getid.sys.id,
+          writername:writer.fields.name,
+          timez:formattedDate
+        };
+      })
+    );
+
+    const shuffledArray = newData.slice().sort(() => Math.random() - 0.5);
+    let arrx =  shuffledArray.slice(0, 4); 
+
+    setHerodata(arrx)
+    }
+
+    HeroAPi()
+
+
+
+    const Feature = async()=>{
+      let features = await client.getEntries({content_type:"feature", select:'fields'})
+
+
+      const newData = await Promise.all(
+        features?.items.map(async (item) => {
+
+          let timez = new Date(item.fields.storyId.sys.createdAt)
+          const monthNames = [
+           "Jan", "Feb", "Mar",
+           "Apr", "May", "Jun", "Jul",
+           "Aug", "Sept", "Oct",
+           "Nov", "Dec"
+         ];
+         const day = timez.getDate();
+          const monthIndex = timez.getMonth();
+          const year = timez.getFullYear();
+          const formattedDate = `${day} ${monthNames[monthIndex]} ${year}`;
+           // console.log(item.fields.storyId.fields.thumbnail.fields.file.url)
+          // console.log(item.fields.storyId.fields.categoryId.sys.id)
+         let data = await client.getEntry(item.fields.storyId.fields.categoryId.sys.id);
+         let writer = await client.getEntry(item.fields.storyId.fields.writerId.sys.id);
+         let getid = await client.getEntry(item.sys.id)
+        //  console.log(data)
+         let answer = data.fields.category;
+
+         return {
+           heading: item.fields.storyId.fields.heading,
+          //  summary: item.fields.storyId.fields.summary,
+          summary:item.fields.storyId.fields.preSummary,
+           category: answer,
+           thumbnail:item.fields.storyId.fields.thumbnail.fields.file.url,
+           writername:writer.fields.name,
+           timez:formattedDate,
+           id:getid.sys.id,
+         };
+       })
+     );
+     setfeatured(newData)
+             
+    }
+
+    Feature()
+
+  
+
+
+    const Popular = async()=>{
+      let popularstories = await client.getEntries({content_type:"popularstories", select:'fields'})
+      const newData = await Promise.all(
+        popularstories?.items.map(async (item) => {
+
+          let timez = new Date(item.fields.storyId.sys.createdAt)
+          const monthNames = [
+           "Jan", "Feb", "Mar",
+           "Apr", "May", "Jun", "Jul",
+           "Aug", "Sept", "Oct",
+           "Nov", "Dec"
+         ];
+         const day = timez.getDate();
+          const monthIndex = timez.getMonth();
+          const year = timez.getFullYear();
+          const formattedDate = `${day} ${monthNames[monthIndex]} ${year}`;
+           // console.log(item.fields.storyId.fields.thumbnail.fields.file.url)
+          // console.log(item.fields.storyId.fields.categoryId.sys.id)
+         let data = await client.getEntry(item.fields.storyId.fields.categoryId.sys.id);
+         let writer = await client.getEntry(item.fields.storyId.fields.writerId.sys.id);
+         let getid = await client.getEntry(item.sys.id)
+        //  console.log(data)
+         let answer = data.fields.category;
+
+         return {
+           heading: item.fields.storyId.fields.heading,
+          //  summary: item.fields.storyId.fields.summary,
+          summary:item.fields.storyId.fields.preSummary,
+           category: answer,
+           thumbnail:item.fields.storyId.fields.thumbnail.fields.file.url,
+           writername:writer.fields.name,
+           timez:formattedDate,
+           id:getid.sys.id,
+         };
+       })
+     );
+
+     setPopular(newData)
+
+    }
+
+    Popular()
+
+  },[])
   return (
     <>
       <Layout headerStyle={6} footerStyle={3} footerClass="black-bg" logoWhite>
@@ -41,143 +191,127 @@ export default function Home1() {
         <section className="tgbanner__area-five pt-20 pb-30">
           <div className="container">
             <div className="row row--10">
-              <div className="col-lg-12 col-xl-6 col-md-12 col-12 mt--20 ">
-                <div className="tgbanner__five-item big-post">
-                  <div className="tgbanner__five-thumb tgImage__hover   ">
-                    <Link href="/blog/98">
-                      <img
-                        src="/assets/img/lifestyle/life_style15.jpg"
-                        alt="img"
-                      />
-                    </Link>
-                  </div>
-                  <div className="tgbanner__five-content">
-                    <Link
-                      href="/blog"
-                      className="tags text-orange text-uppercase fw-bold"
-                    >
-                      Lifestyle
-                    </Link>
-                    <h2 className="title tgcommon__hover mt-4 mb-4">
-                      <Link href="/blog/98">
-                        The multiverse is a hypothetical group of multiple
-                        universes.
+                {Herodata && Herodata.length > 0?
+                  <div className="col-lg-12 col-xl-6 col-md-12 col-12 mt--20 ">
+                  <div className="tgbanner__five-item big-post">
+                    <div className="tgbanner__five-thumb tgImage__hover   ">
+                      <Link href={`/blog/${Herodata[0].id}`}>
+                        <img
+                          src={Herodata[0].thumbnail}
+                          alt="img"
+                        />
                       </Link>
-                      <p className="custom-paragraph-style">
-                        You can customize the view Blog posts with a simple
-                        mouse click and immediately see the result of your
-                        changes.
-                      </p>
-                    </h2>
-
-                    <ul className="tgbanner__content-meta list-wrap">
-                      <li>
-                        <span className="by">By</span>{" "}
-                        <Link href="/blog">alonso d.</Link>
-                      </li>
-                      <li>nov 21, 2022</li>
-                    </ul>
+                    </div>
+                    <div className="tgbanner__five-content">
+                      <Link
+                       href={`/blog/${Herodata[0].id}`}
+                        className="tags text-orange text-uppercase fw-bold"
+                      >
+                        {Herodata[0].subcategories}
+                      </Link>
+                      <h2 className="title tgcommon__hover mt-4 mb-4">
+                        <Link href={`/blog/${Herodata[0].id}`}>
+                        {Herodata[0].heading}
+                        </Link>
+                        <p className="custom-paragraph-style">
+                        {Herodata[0].summary == undefined || Herodata[0].summary == null?"":Herodata[0].summary.length > 100
+                      ? Herodata[0].summary.substr(0, 150)+"..."
+                      : Herodata[0].summary}
+                        </p>
+                      </h2>
+  
+                      <ul className="tgbanner__content-meta list-wrap">
+                        <li>
+                          <span className="by">By</span>{" "}
+                          <Link href={`/blog/${Herodata[0].id}`}>alonso d.</Link>
+                        </li>
+                        <li>nov 21, 2022</li>
+                      </ul>
+                    </div>
                   </div>
+                </div>
+                
+                
+                :""}
+            
+
+
+              <div className="col-lg-12 col-xl-6 col-md-12 col-12 mt_lg--20 mt_md--20 mt_sm--20">
+              {Herodata && Herodata.length > 0?
+                <div className="tgbanner__five-item small-post">
+                <div className="tgbanner__five-thumb tgImage__hover   ">
+                  <Link href="/blog/99">
+                    <img
+                      src={Herodata[1].thumbnail}
+                      alt="img"
+                    />
+                  </Link>
+                </div>
+                <div className="tgbanner__five-content">
+                  <Link
+                    href="/blog"
+                    className="tags text-orange text-uppercase fw-bold "
+                  >
+                   {Herodata[1].subcategories}
+                  </Link>
+                  <h2 className="title tgcommon__hover mt-2 mb-1">
+                    <Link href="/blog/99">
+                    {Herodata[1].heading}
+                    </Link>
+                  </h2>
+                  <ul className="tgbanner__content-meta list-wrap">
+                    <li>
+                      <span className="by">By</span>{" "}
+                      <Link href="/blog">{Herodata[1].writername}.</Link>
+                    </li>
+                    <li>{Herodata[1].timez}</li>
+                  </ul>
                 </div>
               </div>
-              <div className="col-lg-12 col-xl-6 col-md-12 col-12 mt_lg--20 mt_md--20 mt_sm--20">
-                <div className="tgbanner__five-item small-post">
-                  <div className="tgbanner__five-thumb tgImage__hover   ">
-                    <Link href="/blog/99">
-                      <img
-                        src="/assets/img/adventure/adventure10.jpg"
-                        alt="img"
-                      />
-                    </Link>
-                  </div>
-                  <div className="tgbanner__five-content">
-                    <Link
-                      href="/blog"
-                      className="tags text-orange text-uppercase fw-bold "
-                    >
-                      Workplace & Culture
-                    </Link>
-                    <h2 className="title tgcommon__hover mt-2 mb-1">
-                      <Link href="/blog/99">
-                        That share an universals hierarchy a large camp or
-                        burger.
-                      </Link>
-                    </h2>
-                    <ul className="tgbanner__content-meta list-wrap">
-                      <li>
-                        <span className="by">By</span>{" "}
-                        <Link href="/blog">alonso d.</Link>
-                      </li>
-                      <li>nov 21, 2022</li>
-                    </ul>
-                  </div>
-                </div>
+                  :""}
+              
 
                 <div className="row row--10">
-                  <div className="col-lg-6 col-md-6 col-sm-6 col-12 mt--20">
-                    <div className="tgbanner__five-item small-post">
-                      <div className="tgbanner__five-thumb tgImage__hover   ">
-                        <Link href="/blog/100">
-                          <img
-                            src="/assets/img/adventure/adventure07.jpg"
-                            alt="img"
-                          />
-                        </Link>
-                      </div>
-                      <div className="tgbanner__five-content ">
-                        <Link
-                          href="/blog"
-                          className="tags text-orange text-uppercase fw-bold "
-                        >
-                          Lifestyle
-                        </Link>
+               
+                {Herodata.slice(2,4)?.map((item)=>{
 
-                        <h2 className="title tgcommon__hover mt-2 mb-2">
-                          <Link href="/blog/100">a large camp or burger.</Link>
-                        </h2>
-                        <ul className="tgbanner__content-meta list-wrap">
-                          <li>
-                            <span className="by">By</span>{" "}
-                            <Link href="/blog">alonso d.</Link>
-                          </li>
-                          <li>nov 21, 2022</li>
-                        </ul>
-                      </div>
+                  return  <div className="col-lg-6 col-md-6 col-sm-6 col-12 mt--20">
+                  <div className="tgbanner__five-item small-post">
+                    <div className="tgbanner__five-thumb tgImage__hover   ">
+                      <Link href="/blog/101">
+                        <img
+                          src={item.thumbnail}
+                          alt="img"
+                        />
+                      </Link>
                     </div>
-                  </div>
-
-                  <div className="col-lg-6 col-md-6 col-sm-6 col-12 mt--20">
-                    <div className="tgbanner__five-item small-post">
-                      <div className="tgbanner__five-thumb tgImage__hover   ">
+                    <div className="tgbanner__five-content">
+                      <Link
+                        href="/blog"
+                        className="tags text-orange text-uppercase fw-bold"
+                      >
+                       {item.subcategories}
+                      </Link>
+                      <h2 className="title tgcommon__hover mt-2 mb-2">
                         <Link href="/blog/101">
-                          <img
-                            src="/assets/img/adventure/adventure09.jpg"
-                            alt="img"
-                          />
+                        {item.heading}
                         </Link>
-                      </div>
-                      <div className="tgbanner__five-content">
-                        <Link
-                          href="/blog"
-                          className="tags text-orange text-uppercase fw-bold"
-                        >
-                          Lifestyle
-                        </Link>
-                        <h2 className="title tgcommon__hover mt-2 mb-2">
-                          <Link href="/blog/101">
-                            Another business insight goes here.
-                          </Link>
-                        </h2>
-                        <ul className="tgbanner__content-meta list-wrap">
-                          <li>
-                            <span className="by">By</span>{" "}
-                            <Link href="/blog">alonso d.</Link>
-                          </li>
-                          <li>nov 21, 2022</li>
-                        </ul>
-                      </div>
+                      </h2>
+                      <ul className="tgbanner__content-meta list-wrap">
+                        <li>
+                          <span className="by">By</span>{" "}
+                          <Link href="/blog">{item.writername}.</Link>
+                        </li>
+                        <li>{item.timez}</li>
+                      </ul>
                     </div>
                   </div>
+                </div>
+                })}
+
+                 
+
+
                 </div>
               </div>
             </div>
@@ -230,16 +364,16 @@ export default function Home1() {
               </div>
             </div>
             <div className="row">
-              {data.slice(8, 11).map((item, i) => (
+              {featured.length > 0? featured.map((item, i) => (
                 <div className="col-lg-4 col-sm-6" key={i}>
                   <div className="featured__post">
                     <div
                       className="featured__thumb"
                       style={{
-                        backgroundImage: `url(/assets/img/blog/${item.img})`,
+                        backgroundImage: `url(${item.thumbnail})`,
                       }}
                     >
-                      0{item.id}
+                      {/* 0{item.id} */}
                     </div>
                     <div className="featured__content">
                       <ul className="tgbanner__content-meta list-wrap">
@@ -248,16 +382,16 @@ export default function Home1() {
                         </li>
                         <li>
                           <span className="by">By</span>{" "}
-                          <Link href="/blog">Yokolili L.</Link>
+                          <Link href="/blog">{item.writername}.</Link>
                         </li>
                       </ul>
                       <h4 className="title tgcommon__hover">
-                        <Link href={`/blog/${item.id}`}>{item.title}</Link>
+                        <Link href={`/blog/${item.id}`}>{item.heading}</Link>
                       </h4>
                     </div>
                   </div>
                 </div>
-              ))}
+              )):[]}
             </div>
           </div>
         </section>
@@ -411,13 +545,13 @@ export default function Home1() {
               </div>
             </div>
             <div className="row row-gutters-40">
-              {data.slice(24, 26).map((item, i) => (
+              {popular.slice(0, 2).map((item, i) => (
                 <div className="col-md-6" key={i}>
                   <div className="stories-post__item">
                     <div className="stories-post__thumb tgImage__hover">
                       <Link href={`/blog/${item.id}`}>
                         <img
-                          src={`/assets/img/${item.group}/${item.img}`}
+                          src={item.thumbnail}
                           alt="img"
                         />
                       </Link>
@@ -429,12 +563,12 @@ export default function Home1() {
                         </li>
                         <li>
                           <span className="by">By</span>{" "}
-                          <Link href="/blog">alonso d.</Link>
+                          <Link href="/blog">{item.writer}.</Link>
                         </li>
-                        <li>nov 21, 2022</li>
+                        <li>{item.timez}</li>
                       </ul>
                       <h3 className="title tgcommon__hover">
-                        <Link href={`/blog/${item.id}`}>{item.title}</Link>
+                        <Link href={`/blog/${item.id}`}>{item.heading}</Link>
                       </h3>
                     </div>
                   </div>
@@ -442,7 +576,7 @@ export default function Home1() {
               ))}
             </div>
             <div className="row">
-              {data.slice(26, 30).map((item, i) => (
+              {popular.slice(2, 5)?.map((item, i) => (
                 <div className="col-xl-3 col-lg-4 col-md-6" key={i}>
                   <div className="trending__post stories-small-post__item">
                     <div className="trending__post-thumb tgImage__hover">
@@ -451,7 +585,7 @@ export default function Home1() {
                       </Link>
                       <Link href={`/blog/${item.id}`}>
                         <img
-                          src={`/assets/img/${item.group}/${item.img}`}
+                          src={item.thumbnail}
                           alt="img"
                         />
                       </Link>
@@ -463,11 +597,11 @@ export default function Home1() {
                         </li>
                         <li>
                           <span className="by">By</span>{" "}
-                          <Link href="/blog">miranda h.</Link>
+                          <Link href="/blog">{item.writer}.</Link>
                         </li>
                       </ul>
                       <h4 className="title tgcommon__hover">
-                        <Link href={`/blog/${item.id}`}>{item.title}</Link>
+                        <Link href={`/blog/${item.id}`}>{item.heading}</Link>
                       </h4>
                     </div>
                   </div>
