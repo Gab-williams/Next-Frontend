@@ -17,7 +17,7 @@ export default function AuthorSidebar() {
                             <Link href="#"><i className="fab fa-facebook-f" /></Link>
                             <Link href="#"><i className="fab fa-twitter" /></Link>
                             <Link href="#"><i className="fab fa-instagram" /></Link>
-                            <Link href="#"><i className="fab fa-youtube" /></Link>
+                            <Link href="#"><i className="fab fa-linkedin" /></Link>
                         </div>
                     </div>
                 </div>

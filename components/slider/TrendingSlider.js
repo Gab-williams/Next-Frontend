@@ -120,11 +120,15 @@ export default function TrendingSlider({ showItem }) {
                                     <li className="category"><Link
                                        href={`/business?hello=${encodeURIComponent(item.category)}`}
                                      >{item.category}</Link></li>
-                                    <li><Link href={`/blog/${item.id}`}>{item.writer}</Link></li>
+                                     
+                                   
                                 </ul>
+                                <ul className="tgbanner__content-meta list-wrap"><li className="text-black"><Link href={`/blog/${item.id}`}>By {item.writer}</Link></li></ul>
                                 <h4 className="title tgcommon__hover"><Link href={`/blog/${item.id}`}>{item.heading}</Link></h4>
                                 
+                                
                             </div>
+                            
                         </div>
                     </SwiperSlide>
                 ))}

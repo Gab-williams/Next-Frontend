@@ -62,8 +62,8 @@ export default function BlogSidebar2() {
           
             <aside className="blog-sidebarb">
            
-                <div className="widget sidebar-widget widget_categories">
-                    <h4 className="widget-title">Trending Category</h4>
+                <div className="widget sidebar-widget widget_categories ">
+                    <h2 className="widget-title text-center">Trending Category</h2>
                     <ul className="list-wrap">
 
                         {categoryMenu.map((item)=>{
@@ -82,7 +82,7 @@ export default function BlogSidebar2() {
                     <SidePostSlider />
                 </div>
                 <div className="widget sidebar-widget">
-                    <h4 className="widget-title">Instagram Feeds</h4>
+                    <h4 className="widget-title text-center">Instagram Feeds</h4>
                     <div className="sidebarInsta__wrap">
                         <div className="sidebarInsta__top">
                             <div className="sidebarInsta__logo">

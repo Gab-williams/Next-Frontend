@@ -1,9 +1,25 @@
-import Link from "next/link";
+import { useState } from 'react';
+import Link from 'next/link';
 
 export default function Footer3({ footerClass, logoWhite }) {
+  const [email, setEmail] = useState('');
+  const [isSubscribed, setIsSubscribed] = useState(false);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    // Perform your form submission logic here
+    // For demonstration purposes, let's just set isSubscribed to true
+    // You should replace this with your actual form submission logic
+    setIsSubscribed(true);
+
+    // Clear the email input after successful submission
+    setEmail('');
+  };
+
   return (
     <>
-      <footer className={`footer-area bg-black  ${footerClass}`}>
+      <footer className={`footer-area bg-black ${footerClass}`}>
         <div className="newsletter-style-two style-three pt-80 pb-80">
           <div className="container">
             <div className="row justify-content-center">
@@ -14,20 +30,28 @@ export default function Footer3({ footerClass, logoWhite }) {
                   </div>
                   <span className="sub-title text-white">newsletter</span>
                   <h4 className={`title  text-white`}>
-                    Get notified of the best artiles on <br /> on Dabar
+                    Get notified of the best articles<br /> on Dabar
                   </h4>
+
                 </div>
                 <div className="newsletter__form-wrap text-center">
-                  <form action="#" className="newsletter__form ">
-                    <div className="newsletter__form-grp">
-                      <input
-                        type="email"
-                        placeholder="Email address"
-                        required
-                      />
-                      <div className="form-check">
+                  {isSubscribed ? (
+                    <div className="success-alert">
+                    <p className='text-white'>Thank you for subscribing!</p>
+                  </div>
+                  ) : (
+                    <form onSubmit={handleSubmit} className="newsletter__form">
+                      <div className="newsletter__form-grp col-md-8">
                         <input
-                          className="form-check-input"
+                          type="email"
+                          placeholder="Email address"
+                          required
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                        />
+                        <div className="form-check">
+                        {/* <input
+                          className="form-check-input text-white"
                           type="checkbox"
                           id="flexCheckDefault"
                         />
@@ -35,16 +59,17 @@ export default function Footer3({ footerClass, logoWhite }) {
                           className="form-check-label"
                           htmlFor="flexCheckDefault"
                         >
-                          I agree that my submitted datLink is being collected
+                          I agree to my data is being collected
                           and stored.
-                        </label>
+                        </label> */}
+                        </div>
                       </div>
-                    </div>
-                    <button className="btn" type="submit">
-                      <span className="text">Subscribe</span>
-                      <i className="fas fa-paper-plane" />
-                    </button>
-                  </form>
+                      <button className="btn" type="submit">
+                        <span className="text">Subscribe</span>
+                        <i className="fas fa-paper-plane" />
+                      </button>
+                    </form>
+                  )}
                 </div>
               </div>
             </div>
@@ -55,11 +80,8 @@ export default function Footer3({ footerClass, logoWhite }) {
             <div className="row align-items-center">
               <div className="col-lg-3 col-md-4">
                 <div className="footer__logo logo">
-                  <Link href="/" className="logo-dark">
-                    <img src={`assets/img/logo/w_logo.png`} alt="Logo" />
-                  </Link>
-                  <Link href="/" className="logo-light">
-                    <img src="assets/img/logo/w_logo.png" alt="Logo" />
+                  <Link href="/">
+                    <img src="/assets/img/logo/w_logo.png" alt="Logo" />
                   </Link>
                 </div>
               </div>
@@ -119,9 +141,10 @@ export default function Footer3({ footerClass, logoWhite }) {
                     <li>
                       <Link href="/contact">Contact Us</Link>
                     </li>
-                    <li>
-                      <Link href="#">Privacy Policy</Link>
-                    </li>
+                    {/* <li>
+                    <a href="#" target="_blank">Privacy Policy</a>
+
+                    </li> */}
                   </ul>
                 </div>
               </div>
@@ -132,3 +155,4 @@ export default function Footer3({ footerClass, logoWhite }) {
     </>
   );
 }
+

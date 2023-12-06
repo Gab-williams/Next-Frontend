@@ -423,6 +423,20 @@ export default function Home1() {
             </div>
           </div>
         </section>
+        <div className="advertisement pt-45 pb-10">
+          <div className="container">
+            <div className="col-12">
+              <div className="advertisement__image text-center">
+                <Link href="/#">
+                  <img
+                    src="/assets/img/others/advertisement.png"
+                    alt="advertisement"
+                  />
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
         <section className="featured-post-area section__hover-line pt-75">
           <div className="container">
             <div className="section__title-wrap mb-40">
@@ -467,12 +481,10 @@ export default function Home1() {
                                 {item.category}
                               </Link>
                             </li>
-                            <li>
-                              <Link href={`/blog/${item.id}`}>
-                                {item.writername}
-                              </Link>
-                            </li>
+                           
+                            
                           </ul>
+                          <ul className="tgbanner__content-meta list-wrap"><li className="text-black"><Link href={`/blog/${item.id}`}>By {item.writername}</Link></li></ul>
                           <h4 className="title tgcommon__hover">
                             <Link href={`/blog/${item.id}`}>
                               {item.heading}
@@ -682,10 +694,8 @@ export default function Home1() {
                             {item.category}
                           </Link>
                         </li>
-                        <li>
-                          <Link href={`/blog/${item.id}`}>{item.writername}</Link>
-                        </li>
                       </ul>
+                      <ul className="tgbanner__content-meta list-wrap"><li className="text-black"><Link href={`/blog/${item.id}`}>By {item.writername}</Link></li></ul>
                       <h4 className="title tgcommon__hover">
                         <Link href={`/blog/${item.id}`}>{item.heading}</Link>
                       </h4>

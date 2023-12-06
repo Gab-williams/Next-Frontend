@@ -2,6 +2,7 @@ import Link from "next/link";
 import { FaInstagram, FaFacebookSquare } from "react-icons/fa";
 import { RiTwitterXFill } from "react-icons/ri";
 import { FaLinkedin } from "react-icons/fa6";
+import { IoClose } from "react-icons/io5";
 
 export default function Sidebar({ handleSidebarClose }) {
   return (
@@ -9,7 +10,7 @@ export default function Sidebar({ handleSidebarClose }) {
       <div className="offCanvas__wrap">
         <div className="offCanvas__body">
           <div className="offCanvas__toggle" onClick={handleSidebarClose}>
-            <i className="flaticon-addition" />
+          <IoClose />
           </div>
           <div className="offCanvas__content">
             <div className="offCanvas__logo logo">

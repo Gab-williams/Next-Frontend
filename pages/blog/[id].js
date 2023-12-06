@@ -162,23 +162,23 @@ export default function BlogDetails() {
                     <div className="blog-details-social">
                       <ul className="list-wrap">
                         <li>
-                          <Link href="https://www.facebook.com/profile.php?id=61552875998422&mibextid=ZbWKwL">
+                          <Link href="">
                             <i className="fab fa-facebook-f" />
                           </Link>
                         </li>
                         <li>
-                          <Link href="https://x.com/Dabarnetwork?t=FdWs0919Lh2CqQxq50VUMg&s=09">
+                          <Link href="">
                             <i className="fab fa-twitter" />
                           </Link>
                         </li>
                         <li>
-                          <Link href="https://www.linkedin.com/company/darbar-media/">
+                          <Link href="">
                             <i className="fab fa-linkedin-in" />
                           </Link>
                         </li>
                         <li>
                           <Link href="#">
-                            <i className="fab fa-behance" />
+                            <i className="fab fa-instagram" />
                           </Link>
                         </li>
                         <li>
