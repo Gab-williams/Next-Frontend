@@ -1,1 +1,0 @@
-self.__REACT_LOADABLE_MANIFEST={"../components/layout/Header/Menu.js -> @/components/elements/ThemeSwitch":{"id":"../components/layout/Header/Menu.js -> @/components/elements/ThemeSwitch","files":["static/chunks/components_elements_ThemeSwitch_js.js"]}}
